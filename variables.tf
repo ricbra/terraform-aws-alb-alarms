@@ -16,7 +16,7 @@ variable "prefix" {
 
 variable "response_time_threshold" {
   type        = string
-  default     = "50"
+  default     = "2"
   description = "The average number of milliseconds that requests should complete within."
 }
 
@@ -30,6 +30,18 @@ variable "healthy_hosts_threshold" {
   type        = string
   default     = "0"
   description = "The number of healthy hosts."
+}
+
+variable "httpcode_target_5xx_count_threshold" {
+  type        = string
+  default     = "0"
+  description = "The threshold for target 5xx errors."
+}
+
+variable "httpcode_lb_5xx_count_threshold" {
+  type        = string
+  default     = "0"
+  description = "The number of 5xx HTTP codes that should be returned."
 }
 
 variable "evaluation_period" {

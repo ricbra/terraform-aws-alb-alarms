@@ -46,6 +46,7 @@ resource "aws_cloudwatch_metric_alarm" "target_response_time_average" {
   period              = var.statistic_period
   statistic           = "Average"
   threshold           = var.response_time_threshold
+  treat_missing_data = "notBreaching"
   alarm_description   = format("Average API response time is greater than %s", var.response_time_threshold)
   alarm_actions       = var.actions_alarm
   ok_actions          = var.actions_ok
@@ -65,6 +66,7 @@ resource "aws_cloudwatch_metric_alarm" "unhealthy_hosts" {
   period              = var.statistic_period
   statistic           = "Minimum"
   threshold           = var.unhealthy_hosts_threshold
+  treat_missing_data = "notBreaching"
   alarm_description   = format("Unhealthy host count is greater than %s", var.unhealthy_hosts_threshold)
   alarm_actions       = var.actions_alarm
   ok_actions          = var.actions_ok
@@ -84,6 +86,7 @@ resource "aws_cloudwatch_metric_alarm" "healthy_hosts" {
   period              = var.statistic_period
   statistic           = "Minimum"
   threshold           = var.healthy_hosts_threshold
+  treat_missing_data = "notBreaching"
   alarm_description   = format("Healthy host count is less than or equal to %s", var.healthy_hosts_threshold)
   alarm_actions       = var.actions_alarm
   ok_actions          = var.actions_ok

@@ -18,25 +18,6 @@ resource "aws_cloudwatch_metric_alarm" "httpcode_target_5xx_count" {
   }
 }
 
-resource "aws_cloudwatch_metric_alarm" "httpcode_lb_5xx_count" {
-  alarm_name          = "${var.prefix}alb-${var.load_balancer_id}-high5XXCount"
-  comparison_operator = "GreaterThanThreshold"
-  evaluation_periods  = var.evaluation_period
-  metric_name         = "HTTPCode_ELB_5XX_Count"
-  namespace           = "AWS/ApplicationELB"
-  period              = var.statistic_period
-  statistic           = "Sum"
-  threshold           = var.httpcode_lb_5xx_count_threshold
-  treat_missing_data = "notBreaching"
-  alarm_description   = "Average API 5XX load balancer error code count is too high"
-  alarm_actions       = var.actions_alarm
-  ok_actions          = var.actions_ok
-
-  dimensions = {
-    "LoadBalancer" = var.load_balancer_id
-  }
-}
-
 resource "aws_cloudwatch_metric_alarm" "target_response_time_average" {
   alarm_name          = "${var.prefix}alb-tg-${var.target_group_id}-highResponseTime"
   comparison_operator = "GreaterThanThreshold"
